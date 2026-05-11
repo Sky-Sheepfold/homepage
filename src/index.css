@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c1bbbb;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a8a5a5;
+  }
+}
+
+@keyframes glow-breathe {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+.glow-breathe {
+  animation: glow-breathe 2.5s ease-in-out infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+:root,
+[data-theme="mist"] {
+  --theme-primary: #d7d4cf;
+  --theme-primary-light: #f4f3f2;
+  --theme-primary-dark: #c1bbbb;
+  --theme-text: #4a4845;
+  --theme-text-muted: #8a8580;
+  --theme-border: rgba(193, 187, 187, 0.5);
+  --theme-bg-dots: rgba(185, 236, 252, 0.4);
+  --theme-shadow: rgba(193, 187, 187, 0.3);
+  --theme-scrollbar: #c1bbbb;
+  --theme-scrollbar-hover: #a8a5a5;
+}
+
+[data-theme="stone"] {
+  --theme-primary: #c1bbbb;
+  --theme-primary-light: #f0efef;
+  --theme-primary-dark: #a8a5a5;
+  --theme-text: #4a4845;
+  --theme-text-muted: #8a8580;
+  --theme-border: rgba(193, 187, 187, 0.5);
+  --theme-bg-dots: rgba(185, 236, 252, 0.3);
+  --theme-shadow: rgba(193, 187, 187, 0.3);
+  --theme-scrollbar: #c1bbbb;
+  --theme-scrollbar-hover: #a8a5a5;
+}
+
+[data-theme="sky"] {
+  --theme-primary: #b9ecfc;
+  --theme-primary-light: #f0faff;
+  --theme-primary-dark: #7dd4e8;
+  --theme-text: #3a6670;
+  --theme-text-muted: #6a9aa5;
+  --theme-border: rgba(185, 236, 252, 0.6);
+  --theme-bg-dots: rgba(193, 187, 187, 0.3);
+  --theme-shadow: rgba(185, 236, 252, 0.3);
+  --theme-scrollbar: #b9ecfc;
+  --theme-scrollbar-hover: #7dd4e8;
+}
+
+[data-theme="warm"] {
+  --theme-primary: #ffdeb7;
+  --theme-primary-light: #fff5eb;
+  --theme-primary-dark: #c26108;
+  --theme-text: #653504;
+  --theme-text-muted: #934a06;
+  --theme-border: rgba(255, 199, 138, 0.6);
+  --theme-bg-dots: rgba(255, 160, 48, 0.12);
+  --theme-shadow: rgba(255, 199, 138, 0.4);
+  --theme-scrollbar: #f0c080;
+  --theme-scrollbar-hover: #e8a850;
+}
+
+.theme-bg {
+  background-color: var(--theme-primary-light);
+}
+
+.theme-bg-card {
+  background-color: white;
+  border-color: var(--theme-border);
+  box-shadow: 0 1px 3px var(--theme-shadow);
+}
+
+.theme-border {
+  border-color: var(--theme-border);
+}
+
+.theme-text {
+  color: var(--theme-text);
+}
+
+.theme-text-muted {
+  color: var(--theme-text-muted);
+}
+
+.theme-primary {
+  background-color: var(--theme-primary);
+}
+
+.theme-primary-dark {
+  background-color: var(--theme-primary-dark);
+  color: white;
+}
+
+.theme-dots {
+  background-image: radial-gradient(var(--theme-bg-dots) 1px, transparent 0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-scrollbar);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-scrollbar-hover);
+}
