@@ -95,7 +95,7 @@ export default function ChatSection() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+  }, [messages]);
 
   const handleSend = (text?: string) => {
     const content = (text ?? input).trim();
