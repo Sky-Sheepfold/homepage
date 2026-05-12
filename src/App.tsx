@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import ProfileSection from './components/ProfileSection';
 import ChatSection from './components/ChatSection';
 import ThemeSwitcher from './components/ThemeSwitcher';
+import WorksSection from './components/WorksSection';
 import { applyFavicon } from './utils/faviconService';
 
 function App() {
   useEffect(() => {
     applyFavicon();
+    window.scrollTo(0, 0);
   }, []);
   return (
     <div className="min-h-screen theme-bg">
@@ -22,7 +24,9 @@ function App() {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-6">
+            <WorksSection />
+
             <div className="theme-bg-card rounded-2xl p-6 h-[520px] lg:h-[640px] flex flex-col">
               <ChatSection />
             </div>

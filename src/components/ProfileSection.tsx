@@ -1,4 +1,4 @@
-import { Code2, Brain, Sparkles, Github, BookOpen } from 'lucide-react';
+import { Code2, Brain, Sparkles, Github, Mail, BookOpen } from 'lucide-react';
 
 const infoCards = [
   {
@@ -25,6 +25,7 @@ const infoCards = [
 
 const links = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/Sky-Sheepfold', text: 'Sky-Sheepfold' },
+  { icon: Mail, label: '邮箱', href: 'mailto:yanggq27@gmail.com', text: 'yanggq27@gmail.com' },
 ];
 
 export default function ProfileSection() {
@@ -42,15 +43,20 @@ export default function ProfileSection() {
         后端开发 / AI 应用 · 喜欢用代码把想法变成现实
       </p>
 
-      <a
-        href={links[0].href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-4 inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-white rounded-xl hover:opacity-90 transition-opacity theme-primary-dark"
-      >
-        <Github size={16} />
-        Follow me on GitHub
-      </a>
+      <div className="mt-4 flex items-center justify-center gap-3">
+        {links.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            className="w-10 h-10 flex items-center justify-center rounded-xl hover:opacity-90 transition-opacity theme-primary-dark"
+            title={link.label}
+          >
+            <link.icon size={18} className="text-white" />
+          </a>
+        ))}
+      </div>
 
       <div className="mt-3 px-3 py-1 theme-primary rounded-full">
         <span className="text-xs font-mono theme-text-muted">万物皆可写代码解决</span>

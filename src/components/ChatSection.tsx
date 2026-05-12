@@ -20,7 +20,7 @@ const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
   {
     keywords: ['联系', '邮箱', 'email', '微信', '怎么找你'],
     answer:
-      '你可以通过邮箱 sky@example.com 联系天空，也可以在 GitHub 上找到他。欢迎交流！',
+      '你可以通过邮箱 yanggq27@gmail.com 联系天空，也可以在 GitHub 上找到他。欢迎交流！',
   },
   {
     keywords: ['技术栈', '技术', '会什么', '擅长', '技能', 'stack'],
