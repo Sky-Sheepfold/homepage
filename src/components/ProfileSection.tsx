@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { Code2, Brain, Sparkles, Github, Mail, BookOpen } from 'lucide-react';
+import { getAvatarUrl } from '../utils/avatarService';
 
 const infoCards = [
   {
@@ -29,12 +31,18 @@ const links = [
 ];
 
 export default function ProfileSection() {
+  const [avatarUrl, setAvatarUrl] = useState('/avatars/avatars.png');
+
+  useEffect(() => {
+    getAvatarUrl().then(setAvatarUrl);
+  }, []);
+
   return (
     <section className="flex flex-col items-center text-center">
       <div className="relative mb-4">
         <div className="absolute inset-0 w-28 h-28 rounded-full bg-gradient-to-br from-[var(--theme-primary-dark)] via-[var(--theme-primary)] to-[var(--theme-primary-light)] blur-sm glow-breathe" />
         <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-[var(--theme-primary-dark)] via-[var(--theme-primary)] to-[var(--theme-primary-light)] p-[3px]">
-          <img src="/avatars/avatars.png" alt="Sky-Sheepfold" className="w-full h-full rounded-full object-cover" />
+          <img src={avatarUrl} alt="Sky-Sheepfold" className="w-full h-full rounded-full object-cover" />
         </div>
       </div>
 

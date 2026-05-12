@@ -1,5 +1,5 @@
-type TimeOfDay = 'dawn' | 'day' | 'dusk' | 'night';
-type WeatherType = 'clear' | 'cloudy' | 'rainy' | 'stormy';
+export type TimeOfDay = 'dawn' | 'day' | 'dusk' | 'night';
+export type WeatherType = 'clear' | 'cloudy' | 'rainy' | 'stormy';
 
 interface FaviconInfo {
   filename: string;
@@ -78,7 +78,7 @@ let cachedWeather: WeatherData | null = null;
 let cacheTime: number = 0;
 const CACHE_DURATION = 10 * 60 * 1000;
 
-async function getWeather(): Promise<WeatherData> {
+export async function getWeather(): Promise<WeatherData> {
   const now = Date.now();
   if (cachedWeather && now - cacheTime < CACHE_DURATION) {
     return cachedWeather;
@@ -108,5 +108,3 @@ export async function getFaviconLabel(): Promise<string> {
   const favicon = await getCurrentFavicon();
   return favicon.label;
 }
-
-export { type WeatherType, type TimeOfDay };

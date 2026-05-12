@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, User } from 'lucide-react';
+import { getAvatarUrl } from '../utils/avatarService';
 
 interface Message {
   role: 'user' | 'bot';
@@ -85,7 +86,12 @@ export default function ChatSection() {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState('/avatars/mark-grayson-291814.png');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    getAvatarUrl().then(setAvatarUrl);
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -118,7 +124,7 @@ export default function ChatSection() {
     <section className="flex flex-col h-full">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-9 h-9 rounded-full overflow-hidden">
-          <img src="/avatars/mark-grayson-291814.png" alt="数字分身" className="w-full h-full object-cover" />
+          <img src={avatarUrl} alt="数字分身" className="w-full h-full object-cover" />
         </div>
         <div>
           <h2 className="text-sm font-semibold theme-text">数字分身</h2>
@@ -134,7 +140,7 @@ export default function ChatSection() {
           >
             {msg.role === 'bot' && (
               <div className="flex-shrink-0 w-7 h-7 rounded-full overflow-hidden">
-                <img src="/avatars/mark-grayson-291814.png" alt="Bot" className="w-full h-full object-cover" />
+                <img src={avatarUrl} alt="Bot" className="w-full h-full object-cover" />
               </div>
             )}
             <div
@@ -155,7 +161,7 @@ export default function ChatSection() {
         {isTyping && (
           <div className="flex gap-2 justify-start">
             <div className="flex-shrink-0 w-7 h-7 rounded-full overflow-hidden">
-              <img src="/avatars/mark-grayson-291814.png" alt="Bot" className="w-full h-full object-cover" />
+              <img src={avatarUrl} alt="Bot" className="w-full h-full object-cover" />
             </div>
             <div className="px-4 py-3 bg-white border theme-border rounded-2xl rounded-tl-sm">
               <TypingDots />
