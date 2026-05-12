@@ -6,6 +6,11 @@ interface FaviconInfo {
   label: string;
 }
 
+interface WeatherData {
+  weather: WeatherType;
+  temperature: number;
+}
+
 const FAVICONS: Record<WeatherType, Record<TimeOfDay, FaviconInfo>> = {
   clear: {
     dawn: { filename: 'favicon-sunset-32.png', label: '晨曦' },
@@ -40,39 +45,58 @@ function getTimeOfDay(hour: number): TimeOfDay {
   return 'night';
 }
 
-function getMonth(): number {
-  return new Date().getMonth() + 1;
-}
-
-function guessWeather(): WeatherType {
-  const month = getMonth();
-  const hour = new Date().getHours();
-  const isStormSeason = (month >= 6 && month <= 8) || (month >= 3 && month <= 5);
-
-  if (month >= 12 || month <= 2) {
-    return Math.random() > 0.3 ? 'clear' : 'cloudy';
-  }
-
-  if (isStormSeason && hour >= 14 && hour <= 18) {
-    return Math.random() > 0.5 ? 'stormy' : 'rainy';
-  }
-
-  if (month >= 6 && month <= 9) {
-    return Math.random() > 0.6 ? 'rainy' : 'clear';
-  }
-
+function mapWeatherCode(code: number): WeatherType {
+  if (code === 0) return 'clear';
+  if (code >= 1 && code <= 3) return 'cloudy';
+  if (code >= 45 && code <= 48) return 'cloudy';
+  if (code >= 51 && code <= 67) return 'rainy';
+  if (code >= 71 && code <= 77) return 'cloudy';
+  if (code >= 80 && code <= 82) return 'rainy';
+  if (code >= 85 && code <= 86) return 'rainy';
+  if (code >= 95) return 'stormy';
   return 'clear';
 }
 
-export function getCurrentFavicon(): FaviconInfo {
-  const hour = new Date().getHours();
-  const timeOfDay = getTimeOfDay(hour);
-  const weather = guessWeather();
-  return FAVICONS[weather][timeOfDay];
+async function fetchWeather(): Promise<WeatherData> {
+  try {
+    const response = await fetch(
+      'https://api.open-meteo.com/v1/forecast?latitude=29.56&longitude=106.55&current_weather=true&timezone=Asia%2FShanghai'
+    );
+    const data = await response.json();
+    const weatherCode = data.current_weather?.weathercode ?? 0;
+    const temperature = data.current_weather?.temperature ?? 20;
+    return {
+      weather: mapWeatherCode(weatherCode),
+      temperature,
+    };
+  } catch {
+    return { weather: 'clear', temperature: 20 };
+  }
 }
 
-export function applyFavicon(): void {
-  const favicon = getCurrentFavicon();
+let cachedWeather: WeatherData | null = null;
+let cacheTime: number = 0;
+const CACHE_DURATION = 10 * 60 * 1000;
+
+async function getWeather(): Promise<WeatherData> {
+  const now = Date.now();
+  if (cachedWeather && now - cacheTime < CACHE_DURATION) {
+    return cachedWeather;
+  }
+  cachedWeather = await fetchWeather();
+  cacheTime = now;
+  return cachedWeather;
+}
+
+export async function getCurrentFavicon(): Promise<FaviconInfo> {
+  const hour = new Date().getHours();
+  const timeOfDay = getTimeOfDay(hour);
+  const weatherData = await getWeather();
+  return FAVICONS[weatherData.weather][timeOfDay];
+}
+
+export async function applyFavicon(): Promise<void> {
+  const favicon = await getCurrentFavicon();
   const link = document.querySelector("link[rel='icon']") as HTMLLinkElement;
   if (link) {
     link.href = `/favicon/${favicon.filename}`;
@@ -80,8 +104,8 @@ export function applyFavicon(): void {
   }
 }
 
-export function getFaviconLabel(): string {
-  const favicon = getCurrentFavicon();
+export async function getFaviconLabel(): Promise<string> {
+  const favicon = await getCurrentFavicon();
   return favicon.label;
 }
 
