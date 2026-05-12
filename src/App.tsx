@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import ProfileSection from './components/ProfileSection';
 import ChatSection from './components/ChatSection';
 import ThemeSwitcher from './components/ThemeSwitcher';
+import { applyFavicon } from './utils/faviconService';
 
 function App() {
+  useEffect(() => {
+    applyFavicon();
+  }, []);
   return (
     <div className="min-h-screen theme-bg">
       <div className="fixed inset-0 theme-dots bg-[size:24px_24px] pointer-events-none" />
