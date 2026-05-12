@@ -87,14 +87,16 @@ export default function ChatSection() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState('/avatars/mark-grayson-291814.png');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getAvatarUrl().then(setAvatarUrl);
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSend = (text?: string) => {
@@ -132,7 +134,7 @@ export default function ChatSection() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto space-y-3 min-h-0 pr-1">
+      <div className="flex-1 overflow-y-auto space-y-3 min-h-0 pr-1" ref={messagesContainerRef}>
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -168,7 +170,6 @@ export default function ChatSection() {
             </div>
           </div>
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {messages.length <= 1 && (
