@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Code2, Brain, Sparkles, Github, Mail, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { getAvatarUrl } from '../utils/avatarService';
 
 const infoCards = [
@@ -39,12 +40,16 @@ export default function ProfileSection() {
 
   return (
     <section className="flex flex-col items-center text-center">
-      <div className="relative mb-4">
+      <motion.div
+        className="relative mb-4"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+      >
         <div className="absolute inset-0 w-28 h-28 rounded-full bg-gradient-to-br from-[var(--theme-primary-dark)] via-[var(--theme-primary)] to-[var(--theme-primary-light)] blur-sm glow-breathe" />
         <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-[var(--theme-primary-dark)] via-[var(--theme-primary)] to-[var(--theme-primary-light)] p-[3px]">
           <img src={avatarUrl} alt="Sky-Sheepfold" className="w-full h-full rounded-full object-cover" />
         </div>
-      </div>
+      </motion.div>
 
       <h1 className="text-3xl font-bold theme-text tracking-tight">天空</h1>
       <p className="mt-2 text-sm theme-text-muted max-w-[220px]">
@@ -53,16 +58,18 @@ export default function ProfileSection() {
 
       <div className="mt-4 flex items-center justify-center gap-3">
         {links.map((link) => (
-          <a
+          <motion.a
             key={link.label}
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.95 }}
             className="w-10 h-10 flex items-center justify-center rounded-xl hover:opacity-90 transition-opacity theme-primary-dark"
             title={link.label}
           >
             <link.icon size={18} className="text-white" />
-          </a>
+          </motion.a>
         ))}
       </div>
 
@@ -71,10 +78,14 @@ export default function ProfileSection() {
       </div>
 
       <div className="mt-6 w-full flex flex-col gap-2">
-        {infoCards.map((card) => (
-          <div
+        {infoCards.map((card, index) => (
+          <motion.div
             key={card.label}
-            className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white hover:bg-[var(--theme-primary-light)] transition-colors text-left group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.4 }}
+            whileHover={{ x: 4, backgroundColor: 'var(--theme-primary-light)' }}
+            className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white transition-colors text-left group"
           >
             <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-[var(--theme-primary-light)] flex items-center justify-center">
               <card.icon size={14} className="theme-text-muted" />
@@ -83,7 +94,7 @@ export default function ProfileSection() {
               <p className="text-[10px] font-medium theme-text-muted uppercase tracking-wider">{card.label}</p>
               <p className="text-sm font-medium theme-text">{card.value}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

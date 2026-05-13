@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const works = [
   {
@@ -29,10 +30,14 @@ export default function WorksSection() {
 
       <div className="space-y-3">
         {works.map((work) => (
-          <a
+          <motion.a
             key={work.name}
             href={work.link}
-            className="group theme-bg-card rounded-xl p-5 hover:shadow-lg hover:scale-[1.01] transition-all duration-200 block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="group theme-bg-card rounded-xl p-5 block"
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2">
@@ -45,10 +50,16 @@ export default function WorksSection() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-mono theme-text-muted">{work.year}</span>
-                <ArrowUpRight
-                  size={16}
-                  className="theme-text-muted group-hover:theme-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-colors"
-                />
+                <motion.div
+                  animate={{ x: 0, y: 0 }}
+                  whileHover={{ x: 2, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowUpRight
+                    size={16}
+                    className="theme-text-muted group-hover:theme-primary transition-colors"
+                  />
+                </motion.div>
               </div>
             </div>
 
@@ -56,15 +67,16 @@ export default function WorksSection() {
 
             <div className="flex flex-wrap gap-2">
               {work.tags.map((tag) => (
-                <span
+                <motion.span
                   key={tag}
+                  whileHover={{ scale: 1.05 }}
                   className="px-2.5 py-1 text-[11px] font-medium theme-bg rounded-lg"
                 >
                   {tag}
-                </span>
+                </motion.span>
               ))}
             </div>
-          </a>
+          </motion.a>
         ))}
       </div>
     </section>
