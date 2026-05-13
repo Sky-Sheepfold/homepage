@@ -33,6 +33,8 @@ export default function WorksSection() {
           <motion.a
             key={work.name}
             href={work.link}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
