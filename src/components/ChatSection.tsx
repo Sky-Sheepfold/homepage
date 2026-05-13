@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, User } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { getAvatarUrl } from '../utils/avatarService';
 
 interface Message {
@@ -86,11 +87,11 @@ export default function ChatSection() {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState('/avatars/mark-grayson-291814.png');
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getAvatarUrl().then(setAvatarUrl);
+    getAvatarUrl().then((url) => setAvatarUrl(url));
   }, []);
 
   useEffect(() => {
@@ -126,7 +127,18 @@ export default function ChatSection() {
     <section className="flex flex-col h-full">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-9 h-9 rounded-full overflow-hidden">
-          <img src={avatarUrl} alt="数字分身" className="w-full h-full object-cover" />
+          {avatarUrl ? (
+            <motion.img
+              src={avatarUrl}
+              alt="数字分身"
+              className="w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            />
+          ) : (
+            <div className="w-full h-full bg-[var(--theme-primary-light)] animate-pulse" />
+          )}
         </div>
         <div>
           <h2 className="text-sm font-semibold theme-text">数字分身</h2>
@@ -142,7 +154,18 @@ export default function ChatSection() {
           >
             {msg.role === 'bot' && (
               <div className="flex-shrink-0 w-7 h-7 rounded-full overflow-hidden">
-                <img src={avatarUrl} alt="Bot" className="w-full h-full object-cover" />
+                {avatarUrl ? (
+                  <motion.img
+                    src={avatarUrl}
+                    alt="Bot"
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-[var(--theme-primary-light)] animate-pulse" />
+                )}
               </div>
             )}
             <div
@@ -163,7 +186,18 @@ export default function ChatSection() {
         {isTyping && (
           <div className="flex gap-2 justify-start">
             <div className="flex-shrink-0 w-7 h-7 rounded-full overflow-hidden">
-              <img src={avatarUrl} alt="Bot" className="w-full h-full object-cover" />
+              {avatarUrl ? (
+                <motion.img
+                  src={avatarUrl}
+                  alt="Bot"
+                  className="w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                />
+              ) : (
+                <div className="w-full h-full bg-[var(--theme-primary-light)] animate-pulse" />
+              )}
             </div>
             <div className="px-4 py-3 bg-white border theme-border rounded-2xl rounded-tl-sm">
               <TypingDots />
@@ -178,7 +212,7 @@ export default function ChatSection() {
             <button
               key={s}
               onClick={() => handleSend(s)}
-              className="px-3 py-1.5 text-xs font-medium theme-text bg-white border theme-border rounded-full hover:theme-primary transition-colors"
+              className="px-3 py-1.5 text-xs theme-bg rounded-full hover:opacity-80 transition-opacity"
             >
               {s}
             </button>
@@ -186,22 +220,24 @@ export default function ChatSection() {
         </div>
       )}
 
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-4 flex gap-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="问点什么..."
-          className="flex-1 px-4 py-2.5 text-sm bg-white border theme-border rounded-full theme-text placeholder:theme-text-muted focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary-dark)] transition-all"
+          placeholder="输入消息..."
+          className="flex-1 px-4 py-2.5 text-sm bg-white border theme-border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] theme-text"
         />
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => handleSend()}
           disabled={!input.trim()}
-          className="flex-shrink-0 w-10 h-10 rounded-full theme-primary-dark flex items-center justify-center hover:opacity-90 disabled:opacity-30 disabled:hover:opacity-30 transition-opacity"
+          className="px-4 py-2.5 theme-primary-dark text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
         >
-          <Send size={16} className="text-white" />
-        </button>
+          <Send size={18} />
+        </motion.button>
       </div>
     </section>
   );

@@ -32,10 +32,10 @@ const links = [
 ];
 
 export default function ProfileSection() {
-  const [avatarUrl, setAvatarUrl] = useState('/avatars/avatars.png');
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    getAvatarUrl().then(setAvatarUrl);
+    getAvatarUrl().then((url) => setAvatarUrl(url));
   }, []);
 
   return (
@@ -47,7 +47,18 @@ export default function ProfileSection() {
       >
         <div className="absolute inset-0 w-28 h-28 rounded-full bg-gradient-to-br from-[var(--theme-primary-dark)] via-[var(--theme-primary)] to-[var(--theme-primary-light)] blur-sm glow-breathe" />
         <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-[var(--theme-primary-dark)] via-[var(--theme-primary)] to-[var(--theme-primary-light)] p-[3px]">
-          <img src={avatarUrl} alt="Sky-Sheepfold" className="w-full h-full rounded-full object-cover" />
+          {avatarUrl ? (
+            <motion.img
+              src={avatarUrl}
+              alt="Sky-Sheepfold"
+              className="w-full h-full rounded-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            />
+          ) : (
+            <div className="w-full h-full rounded-full bg-[var(--theme-primary-light)] animate-pulse" />
+          )}
         </div>
       </motion.div>
 
