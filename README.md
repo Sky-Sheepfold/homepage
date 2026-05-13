@@ -1,4 +1,4 @@
-# Sky-Sheepfold
+# 💭 Sky-Sheepfold
 
 <!-- TODO: 替换这里 - 一句话介绍自己 -->
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 技术栈
+## 🛠️ 技术栈
 
 [![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://github.com/Sky-Sheepfold)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://github.com/Sky-Sheepfold)
@@ -20,7 +20,7 @@
 
 ---
 
-## GitHub Stats
+## 📊 GitHub Stats
 
 <p align="left">
   <img src="https://github-readme-stats.vercel.app/api?username=Sky-Sheepfold&theme=tokyonight&show_icons=true&hide_border=true" alt="Sky-Sheepfold's GitHub Stats" height="160"/>
@@ -29,7 +29,7 @@
 
 ---
 
-## GitHub Streak
+## 🔥 GitHub Streak
 
 <p align="left">
   <img src="https://streak-stats.demolab.com?user=Sky-Sheepfold&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
@@ -37,15 +37,15 @@
 
 ---
 
-## 贡献活动
+## 📈 贡献活动
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Sky-Sheepfold&theme=tokyonight&hide_border=true" alt="Contribution Graph"/>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Sky-Sheepfold&theme=tokyonight&hide_border=true&color=7anx&scheeezel" alt="Contribution Graph"/>
 </p>
 
 ---
 
-## 正在做的项目
+## 🚀 正在做的项目
 
 <!-- TODO: 替换这里 - 填写你当前在做的项目 -->
 
@@ -56,7 +56,7 @@
 
 ---
 
-## 联系方式
+## 📮 联系方式
 
 <!-- TODO: 替换这里 - 填写你的联系方式 -->
 
