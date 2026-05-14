@@ -98,9 +98,13 @@ export default function ProfileSection() {
             whileHover={{ x: 4, backgroundColor: 'var(--theme-primary-light)' }}
             className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white transition-colors text-left group"
           >
-            <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-[var(--theme-primary-light)] flex items-center justify-center">
+            <motion.div
+              className="flex-shrink-0 w-7 h-7 rounded-lg bg-[var(--theme-primary-light)] flex items-center justify-center"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
               <card.icon size={14} className="theme-text-muted" />
-            </div>
+            </motion.div>
             <div className="flex-1 min-w-0">
               <p className="text-[10px] font-medium theme-text-muted uppercase tracking-wider">{card.label}</p>
               <p className="text-sm font-medium theme-text">{card.value}</p>

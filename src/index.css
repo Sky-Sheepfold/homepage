@@ -10,27 +10,33 @@
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out;
   }
 
   ::-webkit-scrollbar {
     width: 4px;
+    transition: background 0.3s ease;
   }
 
   ::-webkit-scrollbar-track {
     background: transparent;
+    transition: background 0.3s ease;
   }
 
   ::-webkit-scrollbar-thumb {
     background: #c1bbbb;
     border-radius: 999px;
+    transition: background 0.3s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: #a8a5a5;
+    transition: background 0.3s ease;
   }
 }
 
 @keyframes glow-breathe {
+
   0%,
   100% {
     opacity: 0.4;
@@ -44,9 +50,12 @@
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -56,6 +65,7 @@
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -66,6 +76,7 @@
     transform: scale(1);
     opacity: 0.8;
   }
+
   100% {
     transform: scale(1.5);
     opacity: 0;
@@ -81,12 +92,10 @@
 }
 
 .shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s ease-in-out infinite;
 }
@@ -155,43 +164,53 @@
 
 .theme-bg {
   background-color: var(--theme-primary-light);
+  transition: background-color 0.6s ease-in-out;
 }
 
 .theme-bg-card {
   background-color: white;
   border-color: var(--theme-border);
   box-shadow: 0 1px 3px var(--theme-shadow);
+  transition: all 0.6s ease-in-out;
 }
 
 .theme-border {
   border-color: var(--theme-border);
+  transition: border-color 0.6s ease-in-out;
 }
 
 .theme-text {
   color: var(--theme-text);
+  transition: color 0.6s ease-in-out;
 }
 
 .theme-text-muted {
   color: var(--theme-text-muted);
+  transition: color 0.6s ease-in-out;
 }
 
 .theme-primary {
   background-color: var(--theme-primary);
+  transition: background-color 0.6s ease-in-out;
 }
 
 .theme-primary-dark {
   background-color: var(--theme-primary-dark);
   color: white;
+  transition: all 0.6s ease-in-out;
 }
 
 .theme-dots {
   background-image: radial-gradient(var(--theme-bg-dots) 1px, transparent 0);
+  transition: background-image 0.6s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--theme-scrollbar);
+  transition: background 0.6s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--theme-scrollbar-hover);
+  transition: background 0.6s ease-in-out;
 }

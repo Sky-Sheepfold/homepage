@@ -42,11 +42,10 @@ export default function ThemeSwitcher() {
                   title={t.name}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
-                  className={`w-5 h-5 rounded-full border-2 transition-all ${
-                    theme === t.id
-                      ? 'border-gray-800 scale-110'
-                      : 'border-gray-300 hover:border-gray-400'
-                  }`}
+                  className={`w-5 h-5 rounded-full border-2 transition-all ${theme === t.id
+                    ? 'border-gray-800 scale-110'
+                    : 'border-gray-300 hover:border-gray-400'
+                    }`}
                   style={{ backgroundColor: t.color }}
                 />
               ))}

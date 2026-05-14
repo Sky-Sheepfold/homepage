@@ -4,19 +4,19 @@ import { motion } from 'framer-motion';
 const works = [
   {
     name: '青云职上',
-    description: '智能求职辅助平台，AI 简历优化 + 模拟面试 + 进度管理',
+    description: '智能求职辅助平台，AI 简历分析 + 简历分析 + 模拟面试',
     tags: ['Spring Boot', 'MySQL', 'Redis', 'AI'],
     link: 'https://cloudcareer.me/',
     stats: '进行中',
-    year: '2024',
+    year: '2026',
   },
   {
     name: 'AI Workspace Agent',
     description: '研究 AI Agent 在个人工作流中的实际应用，探索智能体协作的可能性',
-    tags: ['LangChain', 'Agent', '自动化'],
+    tags: ['Spring AI', 'Agent', 'MCP'],
     link: 'https://github.com/Sky-Sheepfold/Personal-AI-Workspace-Agent/tree/develop',
     stats: '研究中',
-    year: '2024',
+    year: '2026',
   },
 ];
 

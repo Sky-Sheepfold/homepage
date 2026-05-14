@@ -170,8 +170,8 @@ export default function ChatSection() {
             )}
             <div
               className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed border ${msg.role === 'bot'
-                ? 'bg-white theme-text theme-border rounded-tl-sm'
-                : 'theme-primary-dark text-white rounded-tr-sm border-transparent'
+                  ? 'bg-white theme-text theme-border rounded-tl-sm'
+                  : 'theme-primary-dark text-white rounded-tr-sm border-transparent'
                 }`}
             >
               {msg.content}
