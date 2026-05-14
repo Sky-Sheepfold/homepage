@@ -38,7 +38,7 @@ const FAVICONS: Record<WeatherType, Record<TimeOfDay, FaviconInfo>> = {
   },
 };
 
-function getTimeOfDay(hour: number): TimeOfDay {
+export function getTimeOfDay(hour: number): TimeOfDay {
   if (hour >= 5 && hour < 8) return 'dawn';
   if (hour >= 8 && hour < 17) return 'day';
   if (hour >= 17 && hour < 20) return 'dusk';

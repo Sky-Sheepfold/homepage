@@ -1,4 +1,4 @@
-import { type TimeOfDay, type WeatherType, getWeather } from './faviconService';
+import { type TimeOfDay, type WeatherType, getWeather, getTimeOfDay } from './faviconService';
 
 interface AvatarInfo {
   filename: string;
@@ -34,11 +34,7 @@ const AVATARS: Record<WeatherType, Record<TimeOfDay, AvatarInfo>> = {
 
 export async function getCurrentAvatar(): Promise<AvatarInfo> {
   const hour = new Date().getHours();
-  let timeOfDay: TimeOfDay;
-  if (hour >= 5 && hour < 8) timeOfDay = 'dawn';
-  else if (hour >= 8 && hour < 17) timeOfDay = 'day';
-  else if (hour >= 17 && hour < 20) timeOfDay = 'dusk';
-  else timeOfDay = 'night';
+  const timeOfDay = getTimeOfDay(hour);
 
   const weatherData = await getWeather();
   return AVATARS[weatherData.weather][timeOfDay];
