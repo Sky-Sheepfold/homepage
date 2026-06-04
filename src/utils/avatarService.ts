@@ -1,6 +1,6 @@
 import { type TimeOfDay, type WeatherType, getWeather, getTimeOfDay } from './faviconService';
 
-interface AvatarInfo {
+export interface AvatarInfo {
   filename: string;
   label: string;
 }
@@ -32,12 +32,16 @@ const AVATARS: Record<WeatherType, Record<TimeOfDay, AvatarInfo>> = {
   },
 };
 
+export function getAvatarForConditions(weather: WeatherType, timeOfDay: TimeOfDay): AvatarInfo {
+  return AVATARS[weather][timeOfDay];
+}
+
 export async function getCurrentAvatar(): Promise<AvatarInfo> {
   const hour = new Date().getHours();
   const timeOfDay = getTimeOfDay(hour);
 
   const weatherData = await getWeather();
-  return AVATARS[weatherData.weather][timeOfDay];
+  return getAvatarForConditions(weatherData.weather, timeOfDay);
 }
 
 export async function getAvatarUrl(): Promise<string> {
