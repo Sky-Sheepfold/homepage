@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, FileText, Github, Mail } from 'lucide-react';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import { getAvatarUrl } from './utils/avatarService';
 import { applyFavicon } from './utils/faviconService';
+import { getSolarThemeSchedule, type Theme } from './utils/solarTheme';
+import { getVisitorLocation, type VisitorLocation } from './utils/ipLocationService';
 
 const projects = [
   {
@@ -57,12 +59,86 @@ const quickLinks = [
   },
 ];
 
+type HeroScene = 'day' | 'night';
+
+const heroVisuals: Record<HeroScene, { src: string; alt: string }> = {
+  day: {
+    src: '/images/hero-workspace-day.png',
+    alt: '白天像素风开发桌面，窗外是明亮天空，桌面上有代码屏幕和 AI 工作流线索',
+  },
+  night: {
+    src: '/images/hero-workspace-night.png',
+    alt: '夜晚像素风开发桌面，窗外是深蓝夜色，桌面上有代码屏幕和 AI 工作流线索',
+  },
+};
+
 function App() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [solarLocation, setSolarLocation] = useState<VisitorLocation | null>(null);
+  const [theme, setTheme] = useState<Theme>(() => getSolarThemeSchedule().theme);
+  const hasManualTheme = useRef(false);
+  const heroScene = theme === 'dark' ? 'night' : 'day';
+  const activeHeroVisual = heroVisuals[heroScene];
 
   useEffect(() => {
     applyFavicon();
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (solarLocation) {
+      document.documentElement.setAttribute('data-solar-location-source', solarLocation.source);
+    }
+  }, [solarLocation]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function syncVisitorLocation() {
+      const location = await getVisitorLocation();
+      if (isMounted) {
+        setSolarLocation(location);
+      }
+    }
+
+    syncVisitorLocation();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+    useEffect(() => {
+    let timeoutId: number;
+
+    const scheduleNextSolarTransition = (isBoundaryTransition = false) => {
+      const schedule = getSolarThemeSchedule(new Date(), solarLocation ?? undefined);
+
+      if (isBoundaryTransition || !hasManualTheme.current) {
+        hasManualTheme.current = false;
+        setTheme(schedule.theme);
+      }
+
+      const transitionDelay = Math.max(schedule.nextTransition.getTime() - Date.now() + 1000, 1000);
+      timeoutId = window.setTimeout(() => scheduleNextSolarTransition(true), transitionDelay);
+    };
+
+    scheduleNextSolarTransition();
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [solarLocation]);
+
+  useEffect(() => {
+    Object.values(heroVisuals).forEach((visual) => {
+      const image = new Image();
+      image.src = visual.src;
+    });
   }, []);
 
   useEffect(() => {
@@ -83,6 +159,11 @@ function App() {
       window.clearInterval(intervalId);
     };
   }, []);
+
+  const handleThemeChange = (nextTheme: Theme) => {
+    hasManualTheme.current = true;
+    setTheme(nextTheme);
+  };
 
   return (
     <main className="site-shell">
@@ -110,7 +191,7 @@ function App() {
           <a href="#contact">Contact</a>
         </nav>
 
-        <ThemeSwitcher />
+        <ThemeSwitcher theme={theme} onThemeChange={handleThemeChange} />
       </header>
 
       <section id="top" className="hero-section" aria-labelledby="hero-title">
@@ -148,8 +229,23 @@ function App() {
           <p className="availability">正在寻找 Java 后端 / AI 应用方向实习机会</p>
         </div>
 
-        <div className="hero-media" aria-label="像素风开发桌面">
-          <img src="/images/hero-workspace.png" alt="像素风开发桌面，窗外是天空，桌面上有代码屏幕和 AI 工作流线索" />
+        <div className="hero-media" data-hero-scene={heroScene} aria-label={activeHeroVisual.alt}>
+          {(Object.entries(heroVisuals) as Array<[HeroScene, (typeof heroVisuals)[HeroScene]]>).map(
+            ([scene, visual]) => {
+              const isActive = scene === heroScene;
+              return (
+                <img
+                  key={scene}
+                  className={isActive ? 'hero-image is-active' : 'hero-image'}
+                  src={visual.src}
+                  alt={isActive ? visual.alt : ''}
+                  aria-hidden={!isActive}
+                  loading="eager"
+                  decoding="async"
+                />
+              );
+            }
+          )}
         </div>
       </section>
 
