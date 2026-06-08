@@ -16,11 +16,11 @@ const projects = [
     year: '2026',
   },
   {
-    name: 'AI Workspace Agent',
-    description: '探索 AI Agent 在个人开发工作流中的任务调度、信息整理与协作能力。',
-    tags: ['Spring AI', 'Agent', 'MCP'],
-    href: 'https://github.com/Sky-Sheepfold/Personal-AI-Workspace-Agent/tree/develop',
-    status: '研究中',
+    name: 'Decision Companion',
+    description: '人生决策伙伴 Agent，基于 Java 与 Spring AI，面向人生选择、日常困惑与长期自我理解场景。',
+    tags: ['Java', 'Spring AI', 'Agent'],
+    href: 'https://github.com/Sky-Sheepfold/decision-companion',
+    status: '进行中',
     year: '2026',
   },
 ];
@@ -36,7 +36,7 @@ const stackGroups = [
   },
   {
     title: '开发工具',
-    items: ['Git', 'Docker', 'Linux', 'React', 'TypeScript'],
+    items: ['Git', 'Docker', 'Linux', 'Maven'],
   },
 ];
 
@@ -186,9 +186,9 @@ function App() {
         </a>
 
         <nav className="nav-links" aria-label="页面导航">
-          <a href="#projects">Projects</a>
-          <a href="#stack">Stack</a>
-          <a href="#contact">Contact</a>
+          <a href="#projects">项目</a>
+          <a href="#stack">技能</a>
+          <a href="#contact">联系</a>
         </nav>
 
         <ThemeSwitcher theme={theme} onThemeChange={handleThemeChange} />
@@ -197,13 +197,13 @@ function App() {
       <section id="top" className="hero-section" aria-labelledby="hero-title">
         <div className="hero-copy">
           <h1 id="hero-title">
-            <span>软件工程在读，专注</span>
-            <span>Java 后端与 AI 应用落地。</span>
+            <span>软件工程在读</span>
+            <span>专注 Java 后端与 AI 应用落地</span>
           </h1>
           <div className="hero-body">
             <p>
-              我是天空，喜欢用代码把想法变成现实。最近在做智能求职辅助平台，也在探索
-              AI Agent 如何进入真实开发工作流。
+              我是码上天空，喜欢用代码把想法变成现实。最近在做智能求职辅助平台，也在探索
+              AI Agent 如何成为更懂人的决策伙伴。
             </p>
             <p>
               我更在意把技术拆到可执行的产品里：稳定的后端服务、清楚的数据流，以及能真正帮人省时间的 AI 能力。

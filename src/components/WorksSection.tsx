@@ -11,11 +11,11 @@ const works = [
     year: '2026',
   },
   {
-    name: 'AI Workspace Agent',
-    description: '研究 AI Agent 在个人工作流中的实际应用，探索智能体协作的可能性',
-    tags: ['Spring AI', 'Agent', 'MCP'],
-    link: 'https://github.com/Sky-Sheepfold/Personal-AI-Workspace-Agent/tree/develop',
-    stats: '研究中',
+    name: 'Decision Companion',
+    description: '基于 Java 与 Spring AI 的人生决策伙伴 Agent，持续沉淀个人长期档案',
+    tags: ['Java', 'Spring AI', 'Agent'],
+    link: 'https://github.com/Sky-Sheepfold/decision-companion',
+    stats: '进行中',
     year: '2026',
   },
 ];

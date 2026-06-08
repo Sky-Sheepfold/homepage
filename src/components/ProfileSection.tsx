@@ -17,7 +17,7 @@ const infoCards = [
   {
     icon: Sparkles,
     label: '当前项目',
-    value: '青云职上 / AI Workspace Agent',
+    value: '青云职上 / Decision Companion',
   },
   {
     icon: BookOpen,

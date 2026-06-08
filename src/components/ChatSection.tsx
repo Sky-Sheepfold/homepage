@@ -17,7 +17,7 @@ const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
   {
     keywords: ['做什么', '在做什么', '最近', '当前', '现在'],
     answer:
-      '天空目前主要在做两件事：\n1. 「青云职上」— 一个智能求职辅助平台，帮助求职者优化简历、模拟面试等\n2. Personal AI Workspace Agent — 研究 AI Agent 在个人工作流中的应用',
+      '天空目前主要在做两件事：\n1. 「青云职上」— 一个智能求职辅助平台，帮助求职者优化简历、模拟面试等\n2. Decision Companion — 基于 Java 和 Spring AI 的人生决策伙伴 Agent',
   },
   {
     keywords: ['联系', '邮箱', 'email', '微信', '怎么找你'],
@@ -27,7 +27,7 @@ const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
   {
     keywords: ['技术栈', '技术', '会什么', '擅长', '技能', 'stack'],
     answer:
-      '天空的主要技术栈：\n• 后端：Java / Spring Boot / MyBatis-Plus\n• 数据库：MySQL / Redis\n• AI 应用：LangChain4j / Prompt Engineering\n• 工具：Git / Docker / Linux\n• 前端基础：React / TypeScript',
+      '天空的主要技术栈：\n• 后端：Java / Spring Boot / MyBatis-Plus\n• 数据库：MySQL / Redis\n• AI 应用：Spring AI / LangChain4j / Prompt Engineering\n• 工具：Git / Docker / Linux / Maven',
   },
   {
     keywords: ['青云', '求职', '平台', '项目', 'qingyun'],
@@ -45,9 +45,9 @@ const KNOWLEDGE: { keywords: string[]; answer: string }[] = [
       '天空是重庆某高校软件工程专业大三在读学生，对后端开发和 AI 应用有浓厚兴趣和实战经验。',
   },
   {
-    keywords: ['agent', 'ai', '智能体', 'workspace'],
+    keywords: ['agent', 'ai', '智能体', 'decision', 'companion', '决策', '陪伴'],
     answer:
-      '天空在研究 AI Agent 的实际应用，特别是 Personal AI Workspace Agent — 让 AI Agent 帮助管理日常开发工作流，比如自动化任务调度、信息整理、代码辅助等。他相信 AI Agent 是未来开发者的标配工具。',
+      '天空在做 Decision Companion，一个面向人生选择、日常困惑与长期自我理解的 AI 决策陪伴应用。它会通过对话持续提炼用户的价值观、决策历史和情绪模式，让 AI 不只是回答当下问题，而是逐渐更懂你。',
   },
   {
     keywords: ['兴趣', '爱好', '喜欢', '平时'],
