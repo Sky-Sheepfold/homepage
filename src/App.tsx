@@ -63,12 +63,12 @@ type HeroScene = 'day' | 'night';
 
 const heroVisuals: Record<HeroScene, { src: string; alt: string }> = {
   day: {
-    src: '/images/hero-workspace-day.png',
-    alt: '白天像素风开发桌面，窗外是明亮天空，桌面上有代码屏幕和 AI 工作流线索',
+    src: '/images/hero-workspace-developer.png',
+    alt: '像素风开发桌面，开发者坐在代码屏幕前，窗外是天空与城市，桌面上有 AI 工作流线索',
   },
   night: {
-    src: '/images/hero-workspace-night.png',
-    alt: '夜晚像素风开发桌面，窗外是深蓝夜色，桌面上有代码屏幕和 AI 工作流线索',
+    src: '/images/hero-workspace-developer-night.png',
+    alt: '夜间像素风开发桌面，开发者坐在代码屏幕前，窗外是月光城市，桌面上有 AI 工作流线索',
   },
 };
 
