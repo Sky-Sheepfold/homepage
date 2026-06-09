@@ -1,60 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Github, Mail } from 'lucide-react';
 import ThemeSwitcher from './components/ThemeSwitcher';
+import { lifeItems, notes, nowItems, projects, quickLinks, stackGroups } from './content/home';
 import { getAvatarUrl } from './utils/avatarService';
 import { applyFavicon } from './utils/faviconService';
 import { getSolarThemeSchedule, type Theme } from './utils/solarTheme';
 import { getVisitorLocation, type VisitorLocation } from './utils/ipLocationService';
 
-const projects = [
-  {
-    name: '青云职上',
-    description: '智能求职辅助平台，聚焦简历优化、模拟面试与求职流程管理。',
-    tags: ['Spring Boot', 'MySQL', 'Redis', 'AI'],
-    href: 'https://cloudcareer.me/',
-    status: '进行中',
-    year: '2026',
-  },
-  {
-    name: 'Decision Companion',
-    description: '人生决策伙伴 Agent，基于 Java 与 Spring AI，面向人生选择、日常困惑与长期自我理解场景。',
-    tags: ['Java', 'Spring AI', 'Agent'],
-    href: 'https://github.com/Sky-Sheepfold/decision-companion',
-    status: '进行中',
-    year: '2026',
-  },
-];
-
-const stackGroups = [
-  {
-    title: '后端工程',
-    items: ['Java', 'Spring Boot', 'MyBatis-Plus', 'MySQL', 'Redis'],
-  },
-  {
-    title: 'AI 应用',
-    items: ['Spring AI', 'Agent', 'MCP', 'Prompt Engineering', 'AI 接口集成'],
-  },
-  {
-    title: '开发工具',
-    items: ['Git', 'Docker', 'Linux', 'Maven'],
-  },
-];
-
-const quickLinks = [
-  {
-    label: 'Email',
-    href: 'mailto:yanggq27@gmail.com',
-    icon: Mail,
-    primary: true,
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/Sky-Sheepfold',
-    icon: Github,
-  },
-];
-
 type HeroScene = 'day' | 'night';
+
+const brandRoles = ['Java 后端开发', 'AI 应用创造者', '持续记录成长'];
 
 const heroVisuals: Record<HeroScene, { src: string; alt: string }> = {
   day: {
@@ -66,6 +21,43 @@ const heroVisuals: Record<HeroScene, { src: string; alt: string }> = {
     alt: '夜间像素风开发桌面，开发者坐在代码屏幕前，窗外是月光城市，桌面上有 AI 工作流线索',
   },
 };
+
+function RotatingSubtitle() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setIsVisible(false);
+
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+
+      timeoutRef.current = window.setTimeout(() => {
+        setActiveIndex((currentIndex) => (currentIndex + 1) % brandRoles.length);
+        setIsVisible(true);
+      }, 180);
+    }, 2600);
+
+    return () => {
+      window.clearInterval(intervalId);
+
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <span className="brand-role-ticker" aria-label={brandRoles.join('，')}>
+      <span className={isVisible ? 'brand-role-line is-visible' : 'brand-role-line'} aria-hidden="true">
+        {brandRoles[activeIndex]}
+      </span>
+    </span>
+  );
+}
 
 function App() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
@@ -169,20 +161,14 @@ function App() {
           </span>
           <span>
             <span className="brand-name">码上天空</span>
-            <span className="brand-role-ticker" aria-label="Java 后端开发，AI 应用落地，正在寻找实习机会">
-              <span className="brand-role-track" aria-hidden="true">
-                <span>Java 后端开发</span>
-                <span>AI 应用落地</span>
-                <span>正在寻找实习机会</span>
-                <span>Java 后端开发</span>
-              </span>
-            </span>
+            <RotatingSubtitle />
           </span>
         </a>
 
         <nav className="nav-links" aria-label="页面导航">
+          <a href="#now">近况</a>
           <a href="#projects">项目</a>
-          <a href="#stack">技能</a>
+          <a href="#notes">记录</a>
           <a href="#contact">联系</a>
         </nav>
 
@@ -193,7 +179,7 @@ function App() {
         <div className="hero-copy">
           <h1 id="hero-title">
             <span>软件工程在读</span>
-            <span>专注 Java 后端与 AI 应用落地</span>
+            <span>持续做 Java 后端与 AI 应用项目</span>
           </h1>
           <div className="hero-body">
             <p>
@@ -201,7 +187,7 @@ function App() {
               AI Agent 如何成为更懂人的决策伙伴。
             </p>
             <p>
-              我更在意把技术拆到可执行的产品里：稳定的后端服务、清楚的数据流，以及能真正帮人省时间的 AI 能力。
+              这个网站会长期记录我的项目、学习和生活：稳定的后端服务、清楚的数据流，以及能真正帮人省时间的 AI 能力。
             </p>
           </div>
 
@@ -221,7 +207,7 @@ function App() {
             ))}
           </div>
 
-          <p className="availability">正在寻找 Java 后端 / AI 应用方向实习机会</p>
+          <p className="availability">开放 Java 后端 / AI 应用方向实习机会，也欢迎交流项目和想法</p>
         </div>
 
         <div className="hero-media" data-hero-scene={heroScene} aria-label={activeHeroVisual.alt}>
@@ -244,10 +230,27 @@ function App() {
         </div>
       </section>
 
+      <section id="now" className="content-section section-grid" aria-labelledby="now-title">
+        <div>
+          <span className="section-kicker">Now</span>
+          <h2 id="now-title">最近</h2>
+        </div>
+
+        <div className="now-grid">
+          {nowItems.map((item) => (
+            <article className="now-card" key={item.id}>
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section id="projects" className="content-section section-grid" aria-labelledby="projects-title">
         <div>
           <span className="section-kicker">Selected work</span>
-          <h2 id="projects-title">项目</h2>
+          <h2 id="projects-title">项目档案</h2>
         </div>
 
         <div className="project-list">
@@ -265,11 +268,17 @@ function App() {
                   <span>{project.status}</span>
                 </div>
                 <p>{project.description}</p>
+                <ul className="project-details" aria-label={`${project.name} 项目说明`}>
+                  {project.details.map((detail) => (
+                    <li key={detail}>{detail}</li>
+                  ))}
+                </ul>
                 <ul className="tag-list" aria-label={`${project.name} 技术栈`}>
                   {project.tags.map((tag) => (
                     <li key={tag}>{tag}</li>
                   ))}
                 </ul>
+                <p className="project-plan">{project.plan}</p>
               </div>
 
               <div className="project-meta">
@@ -281,18 +290,49 @@ function App() {
         </div>
       </section>
 
-      <section id="stack" className="content-section section-grid" aria-labelledby="stack-title">
+      <section id="notes" className="content-section section-grid" aria-labelledby="notes-title">
         <div>
-          <span className="section-kicker">Capabilities</span>
-          <h2 id="stack-title">技能</h2>
+          <span className="section-kicker">Notes</span>
+          <h2 id="notes-title">学习与复盘</h2>
         </div>
 
-        <div className="stack-grid">
-          {stackGroups.map((group) => (
-            <div className="stack-group" key={group.title}>
-              <h3>{group.title}</h3>
-              <p>{group.items.join(' / ')}</p>
-            </div>
+        <div className="notes-layout">
+          <div className="notes-list">
+            {notes.map((note) => (
+              <article className="note-row" key={note.id}>
+                <div>
+                  <span>{note.category}</span>
+                  <h3>{note.title}</h3>
+                  <p>{note.description}</p>
+                </div>
+                <strong>{note.status}</strong>
+              </article>
+            ))}
+          </div>
+
+          <div className="stack-grid" aria-label="技能栈">
+            {stackGroups.map((group) => (
+              <div className="stack-group" key={group.title}>
+                <h3>{group.title}</h3>
+                <p>{group.items.join(' / ')}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="life" className="content-section section-grid" aria-labelledby="life-title">
+        <div>
+          <span className="section-kicker">Life</span>
+          <h2 id="life-title">生活碎片</h2>
+        </div>
+
+        <div className="life-grid">
+          {lifeItems.map((item) => (
+            <article className="life-card" key={item.id}>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
           ))}
         </div>
       </section>
@@ -305,7 +345,7 @@ function App() {
 
         <div className="contact-copy">
           <p>
-            如果你正在寻找能快速上手业务、愿意把 AI 能力落到真实产品里的实习生，欢迎联系我。
+            如果你想聊项目、AI 应用、后端工程，或者正在寻找能快速上手业务的 Java 后端 / AI 应用方向实习生，欢迎联系我。
           </p>
           <div className="contact-links">
             <a href="mailto:yanggq27@gmail.com">
