@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, FileText, Github, Mail } from 'lucide-react';
+import { ArrowUpRight, Github, Mail } from 'lucide-react';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import { getAvatarUrl } from './utils/avatarService';
 import { applyFavicon } from './utils/faviconService';
@@ -51,11 +51,6 @@ const quickLinks = [
     label: 'GitHub',
     href: 'https://github.com/Sky-Sheepfold',
     icon: Github,
-  },
-  {
-    label: 'Resume',
-    href: '#contact',
-    icon: FileText,
   },
 ];
 
