@@ -55,9 +55,21 @@
 ## GitHub 数据
 
 <p align="center">
-  <a href="https://github.com/Sky-Sheepfold"><img src="https://github-readme-stats.vercel.app/api?username=Sky-Sheepfold&amp;locale=cn&amp;hide_border=true&amp;show_icons=true&amp;rank_icon=github&amp;card_width=420&amp;theme=transparent&amp;cache_seconds=86400" alt="GitHub 数据统计" width="420"></a>
-  <a href="https://github.com/Sky-Sheepfold?tab=repositories"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sky-Sheepfold&amp;layout=compact&amp;locale=cn&amp;hide_border=true&amp;langs_count=6&amp;card_width=320&amp;theme=transparent&amp;cache_seconds=86400" alt="常用语言" width="320"></a>
+  <a href="https://github.com/Sky-Sheepfold">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="./assets/stats/stats-dark.svg">
+      <img src="./assets/stats/stats-light.svg" alt="GitHub 数据统计" width="420">
+    </picture>
+  </a>
+  <a href="https://github.com/Sky-Sheepfold?tab=repositories">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="./assets/stats/top-langs-dark.svg">
+      <img src="./assets/stats/top-langs-light.svg" alt="常用语言" width="320">
+    </picture>
+  </a>
 </p>
+
+<!-- 数据卡由 .github/workflows/readme-stats.yml 每日自动更新 -->
 
 <!-- 可选：连续贡献卡（当前连续天数波动大，默认不启用；需要时取消注释）
 <p align="center"><img src="https://streak-stats.demolab.com/?user=Sky-Sheepfold&amp;locale=zh&amp;hide_border=true&amp;background=00000000&amp;card_width=420" alt="连续贡献" width="420"></p>
